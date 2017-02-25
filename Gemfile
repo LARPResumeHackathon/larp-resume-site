@@ -58,3 +58,6 @@ gem 'ransack'
 
 # Use Devise for user management
 gem 'devise'
+
+# Use SLIM for templating
+gem "slim-rails"
