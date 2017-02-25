@@ -16,6 +16,6 @@ User stories: https://trello.com/b/tDvLnxJ0
   `[issue-number]-name-of-branch` for instance: `3-add-rake-setup-task`
 
 * Commit Messages
-  When you create a commit message, please make it descriptive
+  When you create a commit message, please make it descriptive and
   somewhere within your commit message, please include `closes #[issue-number]`
   for instance: `closes #3`
