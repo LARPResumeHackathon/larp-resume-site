@@ -10,10 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170225231521) do
+ActiveRecord::Schema.define(version: 20170225235104) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "campaign_has_editors", force: :cascade do |t|
+    t.integer  "campaign_id", null: false
+    t.integer  "editor_id",   null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["campaign_id"], name: "index_campaign_has_editors_on_campaign_id", using: :btree
+    t.index ["editor_id"], name: "index_campaign_has_editors_on_editor_id", using: :btree
+  end
 
   create_table "campaigns", force: :cascade do |t|
     t.string   "name",            null: false
@@ -132,6 +141,37 @@ ActiveRecord::Schema.define(version: 20170225231521) do
     t.index ["game_id"], name: "index_runs_on_game_id", using: :btree
   end
 
+  create_table "session_has_gms", force: :cascade do |t|
+    t.integer  "session_id", null: false
+    t.integer  "gm_id",      null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["gm_id"], name: "index_session_has_gms_on_gm_id", using: :btree
+    t.index ["session_id"], name: "index_session_has_gms_on_session_id", using: :btree
+  end
+
+  create_table "session_has_npcs", force: :cascade do |t|
+    t.integer  "session_id",                     null: false
+    t.integer  "npc_id",                         null: false
+    t.string   "character_name"
+    t.boolean  "private",        default: false, null: false
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+    t.index ["npc_id"], name: "index_session_has_npcs_on_npc_id", using: :btree
+    t.index ["session_id"], name: "index_session_has_npcs_on_session_id", using: :btree
+  end
+
+  create_table "session_has_players", force: :cascade do |t|
+    t.integer  "session_id",                     null: false
+    t.integer  "player_id",                      null: false
+    t.string   "character_name"
+    t.boolean  "private",        default: false, null: false
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+    t.index ["player_id"], name: "index_session_has_players_on_player_id", using: :btree
+    t.index ["session_id"], name: "index_session_has_players_on_session_id", using: :btree
+  end
+
   create_table "sessions", force: :cascade do |t|
     t.string   "title",                          null: false
     t.text     "description"
@@ -166,6 +206,8 @@ ActiveRecord::Schema.define(version: 20170225231521) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
 
+  add_foreign_key "campaign_has_editors", "campaigns"
+  add_foreign_key "campaign_has_editors", "users", column: "editor_id"
   add_foreign_key "campaigns", "organizations"
   add_foreign_key "characters", "games"
   add_foreign_key "characters_have_editors", "characters"
@@ -185,5 +227,11 @@ ActiveRecord::Schema.define(version: 20170225231521) do
   add_foreign_key "run_has_players", "games"
   add_foreign_key "run_has_players", "users", column: "editor_id"
   add_foreign_key "runs", "games"
+  add_foreign_key "session_has_gms", "sessions"
+  add_foreign_key "session_has_gms", "users", column: "gm_id"
+  add_foreign_key "session_has_npcs", "sessions"
+  add_foreign_key "session_has_npcs", "users", column: "npc_id"
+  add_foreign_key "session_has_players", "sessions"
+  add_foreign_key "session_has_players", "users", column: "player_id"
   add_foreign_key "sessions", "campaigns"
 end
