@@ -1,0 +1,23 @@
+<div class="field">
+  <%= f.label :name %><br />
+  <%= f.text_field :name, autofocus: true %>
+</div>
+
+<div class="field">
+  <%= f.label :description %><br />
+  <%= f.text_area :description, class: 'materialize-textarea' %>
+</div>
+
+<div class="field">
+  <%= f.label :organization %><br />
+  <%= collection_select(:campaign, :organization_id, Organization.all.order(:name), :id, :name) %>
+</div>
+
+<div class="field">
+  <%= f.label :editors %><br />
+  <%= collection_select(:campaign, :editor_ids, User.all.order(:name), :id, :name, {selected: @campaign.editor_ids}, {multiple: 'multiple'}) %>
+</div>
+
+<div class="actions">
+  <%= f.submit "Save" %>
+</div>

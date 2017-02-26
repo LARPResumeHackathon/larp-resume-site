@@ -1,0 +1,14 @@
+<h1><%= @game.title %></h1>
+
+<div class="description flow-text"><%= @game.description %></div>
+
+<dl>
+  <% if @game.website.present? %>
+    <dt>Website</dt>
+    <dd><%= @game.website %></dd>
+  <% end %>
+  <dt>Minimum Number of Players</dt>
+  <dd><%= @game.min_player_size %></dd>
+  <dt>Maximum Number of Players</dt>
+  <dd><%= @game.max_player_size %></dd>
+</dl>

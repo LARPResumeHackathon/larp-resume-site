@@ -1,0 +1,7 @@
+<h1><%= @campaign.name %></h1>
+
+<div class="description flow-text"><%= @campaign.description %></div>
+
+<% if @campaign.organization.present? %>
+  <p><strong>Organization:</strong> <a href="<%= organization_path(@campaign.organization) %>"><%= @campaign.organization.name %></a></p>
+<% end %>

@@ -1,0 +1,4 @@
+<%= form_for @campaign, method: 'PATCH' do |f| %>
+  <%= f.hidden_field :user_id, value: current_user.id %>
+  <%= render partial: 'form', locals: {f: f} %>
+<% end %>
