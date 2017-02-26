@@ -4,3 +4,12 @@ button {
   @extend .waves-effect;
   @extend .waves-light;
 }
+
+.help-text {
+  margin-top: 0;
+  margin-bottom: 1em;
+  font-size: 14px;
+  font-style: italic;
+  position: relative;
+  top: -14px;
+}

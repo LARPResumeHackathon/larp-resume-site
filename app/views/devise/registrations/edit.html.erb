@@ -26,8 +26,7 @@
     <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
     <%= f.password_field :password, autocomplete: "off" %>
     <% if @minimum_password_length %>
-      <br />
-      <em><%= @minimum_password_length %> characters minimum</em>
+      <div class="help-text"><%= @minimum_password_length %> characters minimum</div>
     <% end %>
   </div>
 
