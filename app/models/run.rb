@@ -6,10 +6,9 @@ class Run < ApplicationRecord
   has_and_belongs_to_many :gms, class_name: "User",
                           join_table: :runs_gms,
                           association_foreign_key: :gm_id
-  has_and_belongs_to_many :players, class_name: "User",
-                          join_table: :runs_players,
-                          association_foreign_key: :player_id
-  has_and_belongs_to_many :npcs, class_name: "User",
-                          join_table: :runs_npcs,
-                          association_foreign_key: :npc_id
+
+  has_many :run_npcs
+  has_many :run_players
+  has_many :npcs, through: :run_npcs
+  has_many :players, through: :run_players
 end
