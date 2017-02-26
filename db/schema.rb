@@ -118,26 +118,22 @@ ActiveRecord::Schema.define(version: 20170225235104) do
   end
 
   create_table "runs_npcs", force: :cascade do |t|
-    t.integer  "run_id",       null: false
-    t.integer  "npc_id",       null: false
-    t.integer  "character_id", null: false
+    t.integer  "run_id",     null: false
+    t.integer  "npc_id",     null: false
     t.boolean  "private"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
-    t.index ["character_id"], name: "index_runs_npcs_on_character_id", using: :btree
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["npc_id"], name: "index_runs_npcs_on_npc_id", using: :btree
     t.index ["run_id"], name: "index_runs_npcs_on_run_id", using: :btree
   end
 
   create_table "runs_players", force: :cascade do |t|
-    t.integer  "run_id",       null: false
-    t.integer  "editor_id",    null: false
-    t.integer  "character_id", null: false
+    t.integer  "run_id",     null: false
+    t.integer  "player_id",  null: false
     t.boolean  "private"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
-    t.index ["character_id"], name: "index_runs_players_on_character_id", using: :btree
-    t.index ["editor_id"], name: "index_runs_players_on_editor_id", using: :btree
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["player_id"], name: "index_runs_players_on_player_id", using: :btree
     t.index ["run_id"], name: "index_runs_players_on_run_id", using: :btree
   end
 
@@ -221,12 +217,10 @@ ActiveRecord::Schema.define(version: 20170225235104) do
   add_foreign_key "runs_editors", "users", column: "editor_id"
   add_foreign_key "runs_gms", "runs"
   add_foreign_key "runs_gms", "users", column: "gm_id"
-  add_foreign_key "runs_npcs", "characters"
   add_foreign_key "runs_npcs", "runs"
   add_foreign_key "runs_npcs", "users", column: "npc_id"
-  add_foreign_key "runs_players", "characters"
   add_foreign_key "runs_players", "runs"
-  add_foreign_key "runs_players", "users", column: "editor_id"
+  add_foreign_key "runs_players", "users", column: "player_id"
   add_foreign_key "sessions", "campaigns"
   add_foreign_key "sessions_gms", "sessions"
   add_foreign_key "sessions_gms", "users", column: "gm_id"

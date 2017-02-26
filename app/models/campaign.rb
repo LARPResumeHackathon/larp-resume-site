@@ -1,4 +1,5 @@
 class Campaign < ApplicationRecord
+  belongs_to :organization
   has_many :sessions
   has_and_belongs_to_many :editors, class_name: "User",
                           join_table: :campaigns_editors,
