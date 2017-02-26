@@ -13,11 +13,20 @@
   <% end %>
 
   <div class="field">
+    <%= f.label :display_name %><br />
+    <%= f.text_field :display_name %>
+  </div>
+
+  <div class="field">
+    <%= f.label :about_me %><br />
+    <%= f.text_area :about_me, class: 'materialize-textarea' %>
+  </div>
+
+  <div class="field">
     <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
     <%= f.password_field :password, autocomplete: "off" %>
     <% if @minimum_password_length %>
-      <br />
-      <em><%= @minimum_password_length %> characters minimum</em>
+      <div class="help-text"><%= @minimum_password_length %> characters minimum</div>
     <% end %>
   </div>
 
