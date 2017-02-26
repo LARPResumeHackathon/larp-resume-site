@@ -14,6 +14,16 @@
 </div>
 
 <div class="field">
+  <%= f.label :authors %><br />
+  <%= collection_select(:campaign, :author_ids, User.all.order(:name), :id, :name, {selected: @campaign.author_ids}, {multiple: 'multiple'}) %>
+</div>
+
+<div class="field">
+  <%= f.label :editors %><br />
+  <%= collection_select(:campaign, :editor_ids, User.all.order(:name), :id, :name, {selected: @campaign.editor_ids}, {multiple: 'multiple'}) %>
+</div>
+
+<div class="field">
   <%= f.label :min_player_size, "Minimum Number of Players" %><br />
   <%= f.number_field :min_player_size %>
 </div>
