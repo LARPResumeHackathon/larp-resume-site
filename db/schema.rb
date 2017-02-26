@@ -15,15 +15,6 @@ ActiveRecord::Schema.define(version: 20170225235104) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "campaign_has_editors", force: :cascade do |t|
-    t.integer  "campaign_id", null: false
-    t.integer  "editor_id",   null: false
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-    t.index ["campaign_id"], name: "index_campaign_has_editors_on_campaign_id", using: :btree
-    t.index ["editor_id"], name: "index_campaign_has_editors_on_editor_id", using: :btree
-  end
-
   create_table "campaigns", force: :cascade do |t|
     t.string   "name",            null: false
     t.text     "description"
@@ -31,6 +22,15 @@ ActiveRecord::Schema.define(version: 20170225235104) do
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
     t.index ["organization_id"], name: "index_campaigns_on_organization_id", using: :btree
+  end
+
+  create_table "campaigns_editors", force: :cascade do |t|
+    t.integer  "campaign_id", null: false
+    t.integer  "editor_id",   null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["campaign_id"], name: "index_campaigns_editors_on_campaign_id", using: :btree
+    t.index ["editor_id"], name: "index_campaigns_editors_on_editor_id", using: :btree
   end
 
   create_table "characters", force: :cascade do |t|
@@ -41,31 +41,13 @@ ActiveRecord::Schema.define(version: 20170225235104) do
     t.index ["game_id"], name: "index_characters_on_game_id", using: :btree
   end
 
-  create_table "characters_have_editors", force: :cascade do |t|
+  create_table "characters_editors", force: :cascade do |t|
     t.integer  "character_id", null: false
     t.integer  "editor_id",    null: false
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
-    t.index ["character_id"], name: "index_characters_have_editors_on_character_id", using: :btree
-    t.index ["editor_id"], name: "index_characters_have_editors_on_editor_id", using: :btree
-  end
-
-  create_table "game_has_authors", force: :cascade do |t|
-    t.integer  "game_id",    null: false
-    t.integer  "author_id",  null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["author_id"], name: "index_game_has_authors_on_author_id", using: :btree
-    t.index ["game_id"], name: "index_game_has_authors_on_game_id", using: :btree
-  end
-
-  create_table "game_has_editors", force: :cascade do |t|
-    t.integer  "game_id",    null: false
-    t.integer  "editor_id",  null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["editor_id"], name: "index_game_has_editors_on_editor_id", using: :btree
-    t.index ["game_id"], name: "index_game_has_editors_on_game_id", using: :btree
+    t.index ["character_id"], name: "index_characters_editors_on_character_id", using: :btree
+    t.index ["editor_id"], name: "index_characters_editors_on_editor_id", using: :btree
   end
 
   create_table "games", force: :cascade do |t|
@@ -79,53 +61,29 @@ ActiveRecord::Schema.define(version: 20170225235104) do
     t.datetime "updated_at",      null: false
   end
 
+  create_table "games_authors", force: :cascade do |t|
+    t.integer  "game_id",    null: false
+    t.integer  "author_id",  null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["author_id"], name: "index_games_authors_on_author_id", using: :btree
+    t.index ["game_id"], name: "index_games_authors_on_game_id", using: :btree
+  end
+
+  create_table "games_editors", force: :cascade do |t|
+    t.integer  "game_id",    null: false
+    t.integer  "editor_id",  null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["editor_id"], name: "index_games_editors_on_editor_id", using: :btree
+    t.index ["game_id"], name: "index_games_editors_on_game_id", using: :btree
+  end
+
   create_table "organizations", force: :cascade do |t|
     t.string   "name",        null: false
     t.text     "description"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
-  end
-
-  create_table "run_has_editors", force: :cascade do |t|
-    t.integer  "run_id",     null: false
-    t.integer  "editor_id",  null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["editor_id"], name: "index_run_has_editors_on_editor_id", using: :btree
-    t.index ["run_id"], name: "index_run_has_editors_on_run_id", using: :btree
-  end
-
-  create_table "run_has_gms", force: :cascade do |t|
-    t.integer  "run_id",     null: false
-    t.integer  "gm_id",      null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["gm_id"], name: "index_run_has_gms_on_gm_id", using: :btree
-    t.index ["run_id"], name: "index_run_has_gms_on_run_id", using: :btree
-  end
-
-  create_table "run_has_npcs", force: :cascade do |t|
-    t.integer  "run_id",       null: false
-    t.integer  "npc_id",       null: false
-    t.integer  "character_id", null: false
-    t.boolean  "private"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
-    t.index ["character_id"], name: "index_run_has_npcs_on_character_id", using: :btree
-    t.index ["npc_id"], name: "index_run_has_npcs_on_npc_id", using: :btree
-    t.index ["run_id"], name: "index_run_has_npcs_on_run_id", using: :btree
-  end
-
-  create_table "run_has_players", force: :cascade do |t|
-    t.integer  "game_id",      null: false
-    t.integer  "editor_id",    null: false
-    t.integer  "character_id", null: false
-    t.boolean  "private"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
-    t.index ["character_id"], name: "index_run_has_players_on_character_id", using: :btree
-    t.index ["editor_id"], name: "index_run_has_players_on_editor_id", using: :btree
-    t.index ["game_id"], name: "index_run_has_players_on_game_id", using: :btree
   end
 
   create_table "runs", force: :cascade do |t|
@@ -141,35 +99,46 @@ ActiveRecord::Schema.define(version: 20170225235104) do
     t.index ["game_id"], name: "index_runs_on_game_id", using: :btree
   end
 
-  create_table "session_has_gms", force: :cascade do |t|
-    t.integer  "session_id", null: false
+  create_table "runs_editors", force: :cascade do |t|
+    t.integer  "run_id",     null: false
+    t.integer  "editor_id",  null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["editor_id"], name: "index_runs_editors_on_editor_id", using: :btree
+    t.index ["run_id"], name: "index_runs_editors_on_run_id", using: :btree
+  end
+
+  create_table "runs_gms", force: :cascade do |t|
+    t.integer  "run_id",     null: false
     t.integer  "gm_id",      null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["gm_id"], name: "index_session_has_gms_on_gm_id", using: :btree
-    t.index ["session_id"], name: "index_session_has_gms_on_session_id", using: :btree
+    t.index ["gm_id"], name: "index_runs_gms_on_gm_id", using: :btree
+    t.index ["run_id"], name: "index_runs_gms_on_run_id", using: :btree
   end
 
-  create_table "session_has_npcs", force: :cascade do |t|
-    t.integer  "session_id",                     null: false
-    t.integer  "npc_id",                         null: false
-    t.string   "character_name"
-    t.boolean  "private",        default: false, null: false
-    t.datetime "created_at",                     null: false
-    t.datetime "updated_at",                     null: false
-    t.index ["npc_id"], name: "index_session_has_npcs_on_npc_id", using: :btree
-    t.index ["session_id"], name: "index_session_has_npcs_on_session_id", using: :btree
+  create_table "runs_npcs", force: :cascade do |t|
+    t.integer  "run_id",       null: false
+    t.integer  "npc_id",       null: false
+    t.integer  "character_id", null: false
+    t.boolean  "private"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.index ["character_id"], name: "index_runs_npcs_on_character_id", using: :btree
+    t.index ["npc_id"], name: "index_runs_npcs_on_npc_id", using: :btree
+    t.index ["run_id"], name: "index_runs_npcs_on_run_id", using: :btree
   end
 
-  create_table "session_has_players", force: :cascade do |t|
-    t.integer  "session_id",                     null: false
-    t.integer  "player_id",                      null: false
-    t.string   "character_name"
-    t.boolean  "private",        default: false, null: false
-    t.datetime "created_at",                     null: false
-    t.datetime "updated_at",                     null: false
-    t.index ["player_id"], name: "index_session_has_players_on_player_id", using: :btree
-    t.index ["session_id"], name: "index_session_has_players_on_session_id", using: :btree
+  create_table "runs_players", force: :cascade do |t|
+    t.integer  "run_id",       null: false
+    t.integer  "editor_id",    null: false
+    t.integer  "character_id", null: false
+    t.boolean  "private"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.index ["character_id"], name: "index_runs_players_on_character_id", using: :btree
+    t.index ["editor_id"], name: "index_runs_players_on_editor_id", using: :btree
+    t.index ["run_id"], name: "index_runs_players_on_run_id", using: :btree
   end
 
   create_table "sessions", force: :cascade do |t|
@@ -184,6 +153,37 @@ ActiveRecord::Schema.define(version: 20170225235104) do
     t.datetime "created_at",                     null: false
     t.datetime "updated_at",                     null: false
     t.index ["campaign_id"], name: "index_sessions_on_campaign_id", using: :btree
+  end
+
+  create_table "sessions_gms", force: :cascade do |t|
+    t.integer  "session_id", null: false
+    t.integer  "gm_id",      null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["gm_id"], name: "index_sessions_gms_on_gm_id", using: :btree
+    t.index ["session_id"], name: "index_sessions_gms_on_session_id", using: :btree
+  end
+
+  create_table "sessions_npcs", force: :cascade do |t|
+    t.integer  "session_id",                     null: false
+    t.integer  "npc_id",                         null: false
+    t.string   "character_name"
+    t.boolean  "private",        default: false, null: false
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+    t.index ["npc_id"], name: "index_sessions_npcs_on_npc_id", using: :btree
+    t.index ["session_id"], name: "index_sessions_npcs_on_session_id", using: :btree
+  end
+
+  create_table "sessions_players", force: :cascade do |t|
+    t.integer  "session_id",                     null: false
+    t.integer  "player_id",                      null: false
+    t.string   "character_name"
+    t.boolean  "private",        default: false, null: false
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+    t.index ["player_id"], name: "index_sessions_players_on_player_id", using: :btree
+    t.index ["session_id"], name: "index_sessions_players_on_session_id", using: :btree
   end
 
   create_table "users", force: :cascade do |t|
@@ -206,32 +206,32 @@ ActiveRecord::Schema.define(version: 20170225235104) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
 
-  add_foreign_key "campaign_has_editors", "campaigns"
-  add_foreign_key "campaign_has_editors", "users", column: "editor_id"
   add_foreign_key "campaigns", "organizations"
+  add_foreign_key "campaigns_editors", "campaigns"
+  add_foreign_key "campaigns_editors", "users", column: "editor_id"
   add_foreign_key "characters", "games"
-  add_foreign_key "characters_have_editors", "characters"
-  add_foreign_key "characters_have_editors", "users", column: "editor_id"
-  add_foreign_key "game_has_authors", "games"
-  add_foreign_key "game_has_authors", "users", column: "author_id"
-  add_foreign_key "game_has_editors", "games"
-  add_foreign_key "game_has_editors", "users", column: "editor_id"
-  add_foreign_key "run_has_editors", "runs"
-  add_foreign_key "run_has_editors", "users", column: "editor_id"
-  add_foreign_key "run_has_gms", "runs"
-  add_foreign_key "run_has_gms", "users", column: "gm_id"
-  add_foreign_key "run_has_npcs", "characters"
-  add_foreign_key "run_has_npcs", "runs"
-  add_foreign_key "run_has_npcs", "users", column: "npc_id"
-  add_foreign_key "run_has_players", "characters"
-  add_foreign_key "run_has_players", "games"
-  add_foreign_key "run_has_players", "users", column: "editor_id"
+  add_foreign_key "characters_editors", "characters"
+  add_foreign_key "characters_editors", "users", column: "editor_id"
+  add_foreign_key "games_authors", "games"
+  add_foreign_key "games_authors", "users", column: "author_id"
+  add_foreign_key "games_editors", "games"
+  add_foreign_key "games_editors", "users", column: "editor_id"
   add_foreign_key "runs", "games"
-  add_foreign_key "session_has_gms", "sessions"
-  add_foreign_key "session_has_gms", "users", column: "gm_id"
-  add_foreign_key "session_has_npcs", "sessions"
-  add_foreign_key "session_has_npcs", "users", column: "npc_id"
-  add_foreign_key "session_has_players", "sessions"
-  add_foreign_key "session_has_players", "users", column: "player_id"
+  add_foreign_key "runs_editors", "runs"
+  add_foreign_key "runs_editors", "users", column: "editor_id"
+  add_foreign_key "runs_gms", "runs"
+  add_foreign_key "runs_gms", "users", column: "gm_id"
+  add_foreign_key "runs_npcs", "characters"
+  add_foreign_key "runs_npcs", "runs"
+  add_foreign_key "runs_npcs", "users", column: "npc_id"
+  add_foreign_key "runs_players", "characters"
+  add_foreign_key "runs_players", "runs"
+  add_foreign_key "runs_players", "users", column: "editor_id"
   add_foreign_key "sessions", "campaigns"
+  add_foreign_key "sessions_gms", "sessions"
+  add_foreign_key "sessions_gms", "users", column: "gm_id"
+  add_foreign_key "sessions_npcs", "sessions"
+  add_foreign_key "sessions_npcs", "users", column: "npc_id"
+  add_foreign_key "sessions_players", "sessions"
+  add_foreign_key "sessions_players", "users", column: "player_id"
 end
