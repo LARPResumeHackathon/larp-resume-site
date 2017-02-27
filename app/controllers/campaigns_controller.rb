@@ -1,4 +1,6 @@
 class CampaignsController < ApplicationController
+	before_action :set_campaign, only: [:show, :edit, :update]
+
 	def index
 		@campaigns = Campaign.all
 	end
