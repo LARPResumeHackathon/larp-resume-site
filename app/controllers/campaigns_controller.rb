@@ -19,20 +19,23 @@ class CampaignsController < ApplicationController
 	end
 
 	def show
-		@campaign = Campaign.find(params[:id])
+
 	end
 
 	def edit
-		@campaign = Campaign.find(params[:id])
+
 	end
 
 	def update
-		@campaign = Campaign.find(params[:id])
 		if @campaign.update(campaign_params)
 			redirect_to @campaign
 		else
 			render "edit"
 		end
+	end
+
+	def set_campaign
+		@campaign = Campaign.find(params[:id])
 	end
 
 	private
