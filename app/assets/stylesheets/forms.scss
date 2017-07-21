@@ -5,6 +5,10 @@ button {
   @extend .waves-light;
 }
 
+select {
+  display: block;
+}
+
 .help-text {
   margin-top: 0;
   margin-bottom: 1em;

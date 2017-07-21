@@ -1,0 +1,18 @@
+<div class="form-row">
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+</div>
+
+<div class="form-row">
+  <%= f.label :description %>
+  <%= f.text_area :description %>
+</div>
+
+<div class="form-row">
+  <%= f.label :organization_id, "Organization "%>
+  <%= f.collection_select :organization_id, Organization.all.order(:name), :id, :name, prompt: true %>
+</div>
+
+<div class="form-row">
+  <%= f.submit "Save" %>
+</div>
