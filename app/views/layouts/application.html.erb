@@ -11,9 +11,17 @@
   <body>
     <%= render partial: 'modules/header' %>
     <div class="container">
-      <p class="notice"><%= notice %></p>
-      <p class="alert"><%= alert %></p>
-      <%= yield %>
+      <% if flash.present? %>
+        <div class="flash-messages">
+          <% flash.each do |type, msg| %>
+            <p class="<%= type %>"><%= msg %></p>
+          <% end %>
+        </div>
+      <% end %>
+
+      <div class="content">
+        <%= yield %>
+      </div>
     </div>
   </body>
 </html>
