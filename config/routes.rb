@@ -8,4 +8,5 @@ Rails.application.routes.draw do
   resources :users
   resources :games
   resources :organizations
+  resources :runs
 end
