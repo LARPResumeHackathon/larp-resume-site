@@ -7,4 +7,5 @@ Rails.application.routes.draw do
   resources :characters, except: :index
   resources :users
   resources :games
+  resources :organizations
 end
