@@ -1,1 +1,9 @@
 <h2>Campaigns</h2>
+
+<% if @campaigns.present? %>
+  <ul>
+    <% @campaigns.each do |campaign| %>
+      <li><%= link_to @campaign.title, campaign_path(@campaign) %></li>
+    <% end %>
+  </ul>
+<% end %>
