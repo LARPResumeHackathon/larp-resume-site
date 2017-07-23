@@ -1,6 +1,6 @@
 <div class="form-row">
   <%= f.label :campaign_id, "Campaign" %>
-  <%= f.collection_select :campaign_id, Campaign.all.order(:title), :id, :title, prompt: true %>
+  <%= f.collection_select :campaign_id, current_user.campaigns.order(:title), :id, :title, prompt: true %>
 </div>
 
 <div class="form-row">
