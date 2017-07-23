@@ -1,6 +1,6 @@
-<h2>New Organization</h2>
+<h2>New Game Run</h2>
 
-<%= form_for @organization, url: {action: 'create'} do |f| %>
+<%= form_for @run, url: {action: 'create'} do |f| %>
   <%= f.hidden_field :user_id, value: current_user.id %>
   <%= render partial: 'form', locals: {f: f} %>
 <% end %>

@@ -1,0 +1,6 @@
+<h2>Edit Organization: <%= @organization.name %></h2>
+
+<%= form_for @organization, method: 'PATCH' do |f| %>
+  <%= f.hidden_field :id %>
+  <%= render partial: 'form', locals: {f: f} %>
+<% end %>

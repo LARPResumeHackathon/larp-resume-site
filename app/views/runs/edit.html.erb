@@ -1,0 +1,6 @@
+<h2>Edit Game Run for <%= @run.game.title %></h2>
+
+<%= form_for @run, method: 'PATCH' do |f| %>
+  <%= f.hidden_field :id %>
+  <%= render partial: 'form', locals: {f: f} %>
+<% end %>
