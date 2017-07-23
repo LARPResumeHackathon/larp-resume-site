@@ -9,4 +9,5 @@ Rails.application.routes.draw do
   resources :games
   resources :organizations
   resources :runs, except: :index
+  resources :sessions, except: :index
 end
