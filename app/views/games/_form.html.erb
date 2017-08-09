@@ -1,0 +1,33 @@
+<div class="form-row">
+  <%= f.label :title %>
+  <%= f.text_field :title %>
+</div>
+
+<div class="form-row">
+  <%= f.label :description %>
+  <%= f.text_area :description %>
+</div>
+
+<div class="form-row">
+  <%= f.label :website %>
+  <%= f.url_field :website %>
+</div>
+
+<div class="form-row">
+  <%= f.label :min_players, "Minimum Number of Players" %>
+  <%= f.number_field :min_players, min: 1 %>
+</div>
+
+<div class="form-row">
+  <%= f.label :max_players, "Maximum Number of Players" %>
+  <%= f.number_field :max_players, min: 1 %>
+</div>
+
+<div class="form-row">
+  <%= f.label :run_time, "Approximate Run Time" %>
+  <%= f.text_field %>
+</div>
+
+<div class="form-row">
+  <%= f.submit "Save" %>
+</div>

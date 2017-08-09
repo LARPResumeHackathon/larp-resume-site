@@ -1,0 +1,27 @@
+<h2>Game: <%= @game.title %></h2>
+
+<h3>Description</h3>
+<div class="description">
+  <%= @game.description.html_safe %>
+</div>
+
+<dl>
+  <dt>Website</dt>
+  <dd><a href="<%= @game.website.html_safe %>"><%= @game.website.html_safe %></a></dd>
+  <dt>Min. Number of Players</dt>
+  <dd><%= @game.min_players %></dd>
+  <dt>Max. Number of Players</dt>
+  <dd><%= @game.max_players %></dd>
+  <dt>Approx. Run Time</dt>
+  <dd><%= @game.run_time %></dd>
+</dl>
+
+<% if @game.runs.present? %>
+  <h3>Runs</h3>
+
+  <ul>
+    <% @game.runs.where(private: false).each do |run| %>
+      <li><%= link_to "Run on #{run.start_datetime} at #{run.location}", run_path(run) %></li>
+    <% end %>
+  </ul>
+<% end %>

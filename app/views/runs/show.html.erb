@@ -1,0 +1,17 @@
+<h2>Run of Game: <%= @run.game.title %></h2>
+
+<h3>Description</h3>
+<div class="description">
+  <%= @run.description.html_safe %>
+</div>
+
+<dl>
+  <dt>Website</dt>
+  <dd><a href="<%= @run.website.html_safe %>"><%= @run.website.html_safe %></a></dd>
+  <dt>Start Date &amp; Time</dt>
+  <dd><%= @run.start_datetime %></dd>
+  <dt>End Date &amp; Time</dt>
+  <dd><%= @run.end_datetime %></dd>
+  <dt>Location</dt>
+  <dd><%= @run.location %></dd>
+</dl>

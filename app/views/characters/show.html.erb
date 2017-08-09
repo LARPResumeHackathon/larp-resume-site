@@ -1,0 +1,6 @@
+<h2><%= @character.name %></h2>
+
+<dl>
+  <dt>Played in</dt>
+  <dd><a href="<%= game_path(@character.game) %>"<%= @character.game.title %></a></dd>
+</dl>

@@ -3,9 +3,16 @@
     <div class="nav-wrapper">
       <a href="#" class="brand-logo">LARPlog</a>
       <ul id="nav-mobile" class="right hide-on-med-and-down">
-        <li><a href="sass.html">Sass</a></li>
-        <li><a href="badges.html">Components</a></li>
-        <li><a href="collapsible.html">JavaScript</a></li>
+        <li><a href="#">Campaigns</a></li>
+        <li><a href="#">Games</a></li>
+        <li><a href="#">People</a></li>
+        <% if current_user.present? %>
+          <li><a href="<%= user_path(current_user) %>">Your Profile</a></li>
+          <li><a href="<%= edit_user_path(current_user) %>">Account Settings</a></li>
+        <% else %>
+          <li><a href="<%= new_user_session_path %>">Sign In</a></li>
+          <li><a href="<%= new_user_registration_path %>">Register</a></li>
+        <% end %>
       </ul>
     </div>
   </nav>
