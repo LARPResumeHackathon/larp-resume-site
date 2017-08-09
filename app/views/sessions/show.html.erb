@@ -1,0 +1,19 @@
+<h2><%= @session.campaign.title %>: <%= @session.title %></h2>
+
+<p class="campaign">A game session of <%= link_to @session.campaign.title, campaign_path(@session.campaign) %>.</p>
+
+<h3>Description</h3>
+<div class="description">
+  <%= @session.description.html_safe %>
+</div>
+
+<dl>
+  <dt>Website</dt>
+  <dd><%= link_to @session.website.html_safe, @session.website.html_safe %></dd>
+  <dt>Start Date &amp; Time</dt>
+  <dd><%= @session.start_datetime %></dd>
+  <dt>End Date &amp; Time</dt>
+  <dd><%= @session.end_datetime %></dd>
+  <dt>Location</dt>
+  <dd><%= @session.location %></dd>
+</dl>

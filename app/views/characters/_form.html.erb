@@ -1,0 +1,13 @@
+<div class="form-row">
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+</div>
+
+<div class="form-row">
+  <%= f.label :game_id, "Played in Game" %>
+  <%= f.collection_select :game_id, Game.all.order(:title), :id, :title, prompt: true %>
+</div>
+
+<div class="form-row">
+  <%= f.submit "Save" %>
+</div>

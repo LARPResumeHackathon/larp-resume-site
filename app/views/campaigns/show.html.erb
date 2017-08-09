@@ -1,0 +1,12 @@
+<h2><%= @campaign.name %></h2>
+
+<div class="desc">
+  <%= @campaign.description %>
+</div>
+
+<dl>
+  <% if @campaign.organization.present? %>
+    <dt>Organized By:</dt>
+    <dd><a href="<%= organization_path(@campaign.organization) %>"><%= @campaign.organization.name %></a></dd>
+  <% end %>
+</dl>
